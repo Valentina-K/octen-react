@@ -25,7 +25,8 @@ export type SimpsonType = {
     surname: string,
     age: number,
     info: string,
-    photo: string
+    photo: string,
+    character?: unknown
 }
 
 export type FullUserType = {
@@ -56,7 +57,7 @@ type CompanyType = {
     bs: string
 }
 
-export type UserType = {name: string, age: number, status: boolean}
+export type UserType = { name: string, age: number, status: boolean }
 
 export type LocationType = {
     "title": string,

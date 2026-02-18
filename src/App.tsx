@@ -1,13 +1,13 @@
 import './App.css'
+import {FamilyComponent} from "./components/FamilyComponent/FamilyComponent.tsx";
+import {simpsons} from "./data/arrays.ts";
 
 function App() {
 
 
   return (
       <>
-          <h1 className="text-3xl font-bold underline">
-              Hello world!
-          </h1>
+          <FamilyComponent family={simpsons}/>
       </>
   )
 }
