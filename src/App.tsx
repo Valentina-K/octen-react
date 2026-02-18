@@ -1,13 +1,13 @@
 import './App.css'
+import {CourseListComponent} from "./components/CourseListComponent/CourseListComponent.tsx";
+import {coursesAndDurationArray} from "./data/arrays.ts";
 
 function App() {
 
 
   return (
       <>
-          <h1 className="text-3xl font-bold underline">
-              Hello world!
-          </h1>
+          <CourseListComponent courses={coursesAndDurationArray} />
       </>
   )
 }
