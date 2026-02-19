@@ -1,15 +1,9 @@
-fetch("https://alerts.in.ua/assets/map.svg", {
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": null,
-    "method": "GET",
-    "mode": "cors",
-    "credentials": "include"
-});
+import type {ITodo} from "../models/todo.ts";
 
-fetch("https://alerts.in.ua/assets/locations.json", {
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": null,
-    "method": "GET",
-    "mode": "cors",
-    "credentials": "include"
-});
+const base_url = import.meta.env.VITE_BASE_URL;
+
+const getTodos = async (): Promise<ITodo[]> => {
+    return await fetch(base_url + 'todos').then((res) => res.json());
+}
+
+export { getTodos };
