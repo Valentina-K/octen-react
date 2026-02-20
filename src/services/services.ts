@@ -1,15 +1,9 @@
-fetch("https://alerts.in.ua/assets/map.svg", {
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": null,
-    "method": "GET",
-    "mode": "cors",
-    "credentials": "include"
-});
+import type {IComment} from "../models/comments.ts";
 
-fetch("https://alerts.in.ua/assets/locations.json", {
-    "referrerPolicy": "strict-origin-when-cross-origin",
-    "body": null,
-    "method": "GET",
-    "mode": "cors",
-    "credentials": "include"
-});
+const base_url = import.meta.env.VITE_BASE_URL;
+
+export const getComments = async (): Promise<IComment[]> =>
+{
+    return await fetch(`${base_url}/comments`)
+        .then(res => res.json());
+}
