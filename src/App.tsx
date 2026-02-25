@@ -1,5 +1,6 @@
 import './App.css'
-import {Todos} from "./components/todos/Todos.tsx";
+import {Products} from "./components/products/Products.tsx";
+//import {Todos} from "./components/todos/Todos.tsx";
 //import {Comments} from "./components/comments/Comments.tsx";
 //import {Posts} from "./components/posts/Posts.tsx";
 
@@ -10,7 +11,8 @@ function App() {
       <>
         {/*<Posts />*/}
           {/*<Comments />*/}
-          <Todos />
+          {/*<Todos />*/}
+          <Products />
       </>
   )
 }

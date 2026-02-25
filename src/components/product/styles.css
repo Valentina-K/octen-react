@@ -1,0 +1,15 @@
+.isSale{
+    display: inline-block;
+    color: #989595;
+    text-decoration: line-through;
+}
+
+.not-sale{
+    display: none;
+}
+
+.discountPercent{
+    text-decoration: none;
+    color: #ef4242;
+    font-size: 18px;
+}

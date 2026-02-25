@@ -9,6 +9,8 @@ export const Comments: FC = () => {
         getComments().then(value => setComments(value));
     })
     return (
-        <div className="ml-auto mr-auto w-3/4">{comments.map(comment => (<Comment key={comment.id} comment={comment}/>))}</div>
+        <div className="ml-auto mr-auto w-3/4">
+            {comments.map(comment => (<Comment key={comment.id} comment={comment}/>))}
+        </div>
     );
 };

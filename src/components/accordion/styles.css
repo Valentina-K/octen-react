@@ -1,0 +1,32 @@
+.accordion {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 15px;
+}
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 6px;
+    cursor: pointer;
+    background: #f7f7f7;
+    font-weight: bold;
+}
+.accordion-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.accordion.open .accordion-body {
+    max-height: 500px;
+}
+
+.arrow{
+    width: 15px;
+    height: 12px;
+}
+
+.down{
+    transform: rotateX(180deg);
+}

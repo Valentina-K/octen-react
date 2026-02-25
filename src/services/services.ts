@@ -1,6 +1,7 @@
 import type {IPost} from "../models/post.ts";
 import type {ITodo} from "../models/todo.ts";
 import type {IComment} from "../models/comment.ts";
+import type {IProduct} from "../models/product.ts";
 
 const base_url = import.meta.env.VITE_BASE_URL;
 
@@ -21,4 +22,9 @@ const getComments = async (): Promise<IComment[]> =>
 
 }
 
-export {getPosts, getTodos, getComments};
+const getProducts = async (): Promise<IProduct[]> => {
+    const result = await fetch(`${base_url}/products`).then((res) => res.json());
+    return result.products;
+}
+
+export {getPosts, getTodos, getComments, getProducts};
