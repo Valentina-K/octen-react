@@ -10,11 +10,15 @@ type ProductProps = {
 
 export const Product: FC<ProductProps> = ({product}) => {
     const [showModal, setShowModal] = useState<boolean>(false);
+    const [showImage, setShowImage] = useState<boolean>(false);
     const newPrice: number = Math.round((product.price - product.discountPercentage * (product.price / 100)) * 100) / 100;
     const isSale = newPrice !== product.price;
     return (
-        <div className="size-1/4 shadow hover:shadow-amber-600 p-3.5 rounded-4xl">
-            <img src={product.images[0]} alt={product.title}/>
+        <div className="relative size-1/4 shadow hover:shadow-amber-600 p-3.5 rounded-4xl">
+            <img src={product.thumbnail} alt={product.title} className="cursor-zoom-in" onClick={() => setShowImage(true)}/>
+            <div className={`overlay ${showImage ? "visible" : ""}`} >
+                <img src={product.images[0]} alt={product.title} className="big-image" onClick={() => setShowImage(false)}/>
+            </div>
             <div className="text-right">
                 <span className={isSale ? "isSale" : "not-sale"}>${product.price}</span>
                 <span className={isSale ? "discountPercent" : "not-sale"}> {product.discountPercentage}%</span>

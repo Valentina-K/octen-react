@@ -25,7 +25,7 @@ export const Details: FC<DetailsProps> = ({category, reviews, meta, shippingInfo
             <p>Category: <strong>{category}</strong></p>
             <p>Tags: <strong>{tagAr}</strong></p>
             <p>SKU: <strong>{sku}</strong></p>
-            <p>Weight: <strong>{weight}kg</strong></p>
+            <p>Weight: <strong>{weight}</strong></p>
             <p>Warranty Information: <strong>{warrantyInformation}</strong></p>
             <p>Shipping Information: <strong>{shippingInformation}</strong></p>
             <p>Return Policy: <strong>{returnPolicy}</strong></p>
