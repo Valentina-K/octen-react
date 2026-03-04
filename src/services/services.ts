@@ -1,2 +1,5 @@
 const base_url = import.meta.env.VITE_BASE_URL;
-console.log(base_url);
+
+export const getData = async <T, >  (endpoint: string):Promise<T>=>{
+    return await fetch(base_url + endpoint).then((response:Response) => response.json());
+}
