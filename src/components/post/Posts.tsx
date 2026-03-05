@@ -7,9 +7,9 @@ import {Post} from "./Post.tsx";
 export const Posts = () => {
     const [posts, setPosts] = useState<IPost[]>([]);
     useEffect(() => {
-        getData<BaseResponseType & {posts: IPost[]}>('/posts').then(({posts}) => setPosts(posts));
-    },[])
+        getData<BaseResponseType & { posts: IPost[] }>('/posts').then(({posts}) => setPosts(posts));
+    }, [])
     return (
-        <div>{posts.map(post => <Post key={post.id} post={post}/>)}</div>
+        <div className="flex flex-wrap gap-5 justify-center">{posts.map(post => <Post key={post.id} post={post}/>)}</div>
     );
 };

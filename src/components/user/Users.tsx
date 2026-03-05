@@ -11,6 +11,6 @@ export const Users = () => {
         getData<BaseResponseType & {users: IUser[]}>('/users').then(({users}) => setUsers(users));
     },[])
     return (
-        <div>{users.map(user => <User key={user.id} user={user} />)}</div>
+        <div className="flex flex-wrap gap-5 justify-center">{users.map(user => <User key={user.id} user={user} />)}</div>
     );
 };

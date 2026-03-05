@@ -1,9 +1,9 @@
-export interface IHair {
+interface IHair {
 	color: string;
 	type: string;
 }
 
-export interface IBank {
+interface IBank {
 	iban: string;
 	cardExpire: string;
 	cardType: string;
@@ -11,7 +11,7 @@ export interface IBank {
 	cardNumber: string;
 }
 
-export interface IAddress {
+interface IAddress {
 	country: string;
 	address: string;
 	city: string;
@@ -21,19 +21,19 @@ export interface IAddress {
 	state: string;
 }
 
-export interface ICoordinates {
+interface ICoordinates {
 	lng: number;
 	lat: number;
 }
 
-export interface ICompany {
+interface ICompany {
 	address: IAddress;
 	name: string;
 	department: string;
 	title: string;
 }
 
-export interface ICrypto {
+interface ICrypto {
 	wallet: string;
 	coin: string;
 	network: string;
