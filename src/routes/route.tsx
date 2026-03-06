@@ -1,7 +1,7 @@
 import {createBrowserRouter} from "react-router";
 import {MainLayout} from "../layout/MainLayout.tsx";
 import {UsersPage} from "../pages/UsersPage.tsx";
-import {PostsPage} from "../pages/PostsPage.tsx";
+import {CartsPage} from "../pages/CartsPage.tsx";
 
 export const routes = createBrowserRouter([
     {
@@ -9,9 +9,7 @@ export const routes = createBrowserRouter([
             {
                 path: 'users', element: <UsersPage />
             },
-            {
-                path: 'posts', element: <PostsPage />
-            }
+            {path: 'users/:id/carts', element: <CartsPage />}
         ]
     }
 ])
