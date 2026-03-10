@@ -1,15 +1,16 @@
 import {createBrowserRouter} from "react-router";
 import {MainLayout} from "../layout/MainLayout.tsx";
 import {UsersPage} from "../pages/UsersPage.tsx";
-import {CartsPage} from "../pages/CartsPage.tsx";
+import {PageLayout} from "../layout/PageLayout.tsx";
 
 export const routes = createBrowserRouter([
     {
         path: '/octen-react', element: <MainLayout/>, children: [
             {
-                path: 'users', element: <UsersPage />
-            },
-            {path: 'users/:id/carts', element: <CartsPage />}
+                path: '', element: <PageLayout />, children: [{
+                    path: 'users', element: <UsersPage />
+                }]
+            }
         ]
     }
 ])

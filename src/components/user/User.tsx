@@ -1,6 +1,5 @@
 import type {IUser} from "../../models/user.ts";
 import type {FC} from "react";
-import {NavLink} from "react-router";
 
 type UserProps = {
     user: IUser;
@@ -25,7 +24,6 @@ export const User: FC<UserProps> = ({user}) => {
                 <p className="ml-2.5">lng: <b>{user.address.coordinates.lng}</b></p>
                 <p className="ml-2.5">lat: <b>{user.address.coordinates.lat}</b></p>
             </div>
-            <NavLink to={`${user.id}/carts`} className={'text-blue-950 text-xl'}>Show carts</NavLink>
         </div>
     );
 };
