@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 
 const Menu = () => {
+    //Link забезпечує внутрішню маршрутизацію
     return (
         <div>
             <ul>
