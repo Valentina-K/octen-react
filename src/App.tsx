@@ -1,20 +1,31 @@
-import './App.css'
+
+import './App.css';
+import {LeftBranch} from "./components/LeftBranch.tsx";
+import {RightBranch} from "./components/RightBranch.tsx";
+import {MyContext} from "./context/MyContext.tsx";
 import {useState} from "react";
-import {RightBar} from "./components/RightBar.tsx";
-import {ThemeContext} from "./context/themeContext";
-import {LeftBar} from "./components/LeftBar.tsx";
-
-
 
 function App() {
-    const [theme, setTheme] = useState('light');
+    //створюємо стейт App
+    const [counter, setCounter] = useState<number>(0);
+    //огортаємо всі дочірні компоненти в MyContext.Provider з дефолтним значенням
+    //в якості counterValue передаємо змінну стейту counter
+    //визначаємо функцію increment, яка буде збільшувати змінну стейту на 1
     return (
-        <ThemeContext.Provider value={{theme: theme, changeTheme:(value)=>setTheme(value)}}>
-            <div className={'flex'}>
-                <LeftBar/>
-                <RightBar/>
-            </div>
-        </ThemeContext.Provider>
+        <>
+
+            <MyContext.Provider value={{
+                counterValue: counter,
+                increment: (obj) => {
+                    setCounter(++obj);
+                }
+            }}>
+
+                <LeftBranch/>
+                <RightBranch/>
+            </MyContext.Provider>
+
+        </>
     );
 }
 
