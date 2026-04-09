@@ -16,7 +16,7 @@ export const UserWithPosts = ({ userId }: { userId: number }) => {
                         {post.comments.map(comment => (
                             <li className={'ml-7'} key={comment.id}>
                                 <p>{comment.body}</p>
-                                <a href="mailto:"><b>{comment.email}</b></a>
+                                <a href={`mailto:${comment.email}`}><b>{comment.email}</b></a>
                             </li>
                         ))}
                     </ul>
