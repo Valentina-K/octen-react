@@ -1,32 +1,59 @@
-import {useAppDispatch, useAppSelector} from "../redux/store.ts";
-import {selectUsers} from "../redux/selectors/userSelectors.ts";
-import {useEffect} from "react";
-import {selectCommentsExist} from "../redux/selectors/commentSelectors.ts";
-import {fetchComments} from "../redux/operations/commentOperations.ts";
-import {selectPosts} from "../redux/selectors/postSelectors.ts";
-import {fetchPosts} from "../redux/operations/postOperations.ts";
-import {fetchUsers} from "../redux/operations/userOperations.ts";
-import {UserWithPosts} from "./users/UserWithPosts.tsx";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
+import type {IUser} from "../models/IUser.ts";
+import {getData} from "../service/service.api.ts";
+import type {IPost} from "../models/IPost.ts";
+import type {IComment} from "../models/IComment.ts";
 
 export const Complex = () => {
-    const dispatch = useAppDispatch();
-    const users = useAppSelector(selectUsers);
-    const commentExist = useAppSelector(selectCommentsExist);
-    const postExist = useAppSelector(selectPosts);
+    const queryClient = useQueryClient();
+    const cachedUsers = queryClient.getQueryData<IUser[]>(['users']);
+    const cachedPosts = queryClient.getQueryData<IPost[]>(['posts']);
+    const cachedComments = queryClient.getQueryData<IComment[]>(['comments']);
 
-    useEffect(() => {
-        if (!users.length) dispatch(fetchUsers());
-        if (!commentExist) dispatch(fetchComments());
-        if (!postExist) dispatch(fetchPosts());
-    }, []);
+    const { data: users } = useQuery<IUser[]>({
+        queryKey: ['users'],
+        queryFn: () => getData<IUser[]>({ endpoint: '/users' }),
+        enabled: !cachedUsers, // запрос делаем только если кеша нет
+    });
 
+    const {data: posts} = useQuery<IPost[]>({
+        queryKey: ['posts'],
+        queryFn: () => getData<IPost[]>({ endpoint: '/posts' }),
+        enabled: !cachedPosts,
+    })
+
+    const {data: comments} = useQuery<IComment[]>({
+        queryKey: ['comments'],
+        queryFn: () => getData<IComment[]>({ endpoint: '/comments' }),
+        enabled: !cachedComments,
+    })
+
+    const finalUsers = users ?? cachedUsers;
+    const finalPosts = posts ?? cachedPosts;
+    const finalComments = comments ?? cachedComments;
     return (
         <div>
-            {users.map(user => (
+            {finalUsers?.map(user => (
                 <div className={'w-3/4 bg-gray-300 rounded-2xl p-3.5 ml-auto mr-auto mt-2 text-left'} key={user.id}>
                     <h2 className={'text-2xl uppercase'}>{user.name}</h2>
                     <p className={'text-xl underline'}>Posts: </p>
-                    <UserWithPosts userId={user.id} />
+                    {finalPosts?.filter((post: IPost) => post.userId === user.id).map((post: IPost) => (
+                        <div key={post.id}>
+                            <h3 className={'text-2xl'}>{post.id}: {post.title}</h3>
+                            <p className={'italic'}>{post.body}</p>
+                            <p className={'ml-2.5 underline'}>Comments:</p>
+                            <ul>
+                                {
+                                    finalComments?.filter((comment: IComment) => (comment.postId === post.id)).map((comment: IComment) => (
+                                        <li className={'ml-7'} key={comment.id}>
+                                            <p>{comment.body}</p>
+                                            <a href={`mailto:${comment.email}`}><b>{comment.email}</b></a>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </div>
+                    ))}
                 </div>
             ))}
         </div>

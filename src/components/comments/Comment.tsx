@@ -9,7 +9,7 @@ export const Comment: FC<CommentPropsType> = ({comment}) => {
         <div className={'w-3/4 border rounded-2xl p-3.5 ml-auto mr-auto mt-2'}>
             <p className={'text-xl uppercase'}>{comment.name}</p>
             <div>{comment.body}</div>
-            <a href="mailto:" className={'inline-block text-right'}>{comment.email}</a>
+            <a href={`mailto:${comment.email}`} className={'inline-block text-right'}>{comment.email}</a>
         </div>
     );
 };

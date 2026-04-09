@@ -1,18 +1,17 @@
-import {selectComments} from "../../redux/selectors/commentSelectors.ts";
-import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
 import type {IComment} from "../../models/IComment.ts";
-import {Comment} from "./Comment";
-import {fetchComments} from "../../redux/operations/commentOperations.ts";
-import {useEffect} from "react";
+import {getData} from "../../service/service.api.ts";
+import {Comment} from "./Comment.tsx";
+import { useQuery } from '@tanstack/react-query';
 
 export const Comments = () => {
-    const dispatch = useAppDispatch();
-    //const commentExist = useAppSelector(selectCommentsExist);
-    //if (!commentExist) dispatch(fetchComments());
-    const comments = useAppSelector(selectComments);
-    useEffect(()=>{
-        dispatch(fetchComments());
-    },[])
+    const {data: comments, isLoading, isError} = useQuery({
+        queryKey:['comments'],
+        queryFn: () => getData<IComment[]>({ endpoint: '/comments' }),
+        initialData: [],
+        staleTime: Infinity
+    })
+    if(isLoading) return <p>Loading...</p>;
+    if(isError) return <p>Error...</p>;
     return (
         <div>{comments.map((comment: IComment) => (
             <Comment key={comment.id} comment={comment}/>))}

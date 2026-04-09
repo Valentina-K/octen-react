@@ -1,16 +1,17 @@
-import {useAppDispatch, useAppSelector} from "../../redux/store.ts";
-import {useEffect} from "react";
-import {fetchUsers} from "../../redux/operations/userOperations.ts";
+import {useQuery} from "@tanstack/react-query";
 import type {IUser} from "../../models/IUser.ts";
-import {selectUsers} from "../../redux/selectors/userSelectors.ts";
 import {User} from "./User.tsx";
+import {getData} from "../../service/service.api.ts";
 
 export const Users = () => {
-    const dispatch = useAppDispatch();
-    const users = useAppSelector(selectUsers);
-    useEffect(() => {
-        dispatch(fetchUsers());
-    },[])
+    const {data: users, isLoading, isError} = useQuery({
+        queryKey: ["users"],
+        queryFn: ()=>getData<IUser[]>({endpoint: "/users"}),
+        initialData: [],
+        staleTime: Infinity
+    });
+    if(isLoading) return <p>Loading...</p>;
+    if(isError) return <p>Error...</p>;
     return (
         <>{users.map((user: IUser) => (<User key={user.id} user={user} />))}</>
     );
